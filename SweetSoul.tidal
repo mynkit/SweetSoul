@@ -145,12 +145,11 @@ do
         s "click ~" # n 2
         # lpf 300 # pan 0.5))
       $ s "~"
-      # gain 1.1
     )),
     (32, 35, (
       fast 8
       $ every' 3 0 (const (
-        s "click ~" # n 2 # lpf 300 # gain 1.1
+        s "click ~" # n 2 # lpf 300
       ))
       $ s "~"
     )),
