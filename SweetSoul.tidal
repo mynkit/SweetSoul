@@ -129,7 +129,7 @@ do
       # gain (range 0.8 0.9 rand)
     ))
     ]
-  d4
+  d4 -- BassDrum-like sound
     $ (|* gain 1.35)
     $ seqP [
     (2, 28, (
@@ -147,25 +147,31 @@ do
       $ s "~"
       # gain 1.1
     )),
-    -- (8, 28, (
-    --   s "click*4"
-    --   # n 2
-    --   # lpf 300
-    --   # gain 1.1
-    -- )),
+    (32, 35, (
+      fast 8
+      $ every' 3 0 (const (
+        s "click ~" # n 2 # lpf 300 # gain 1.1
+      ))
+      $ s "~"
+    )),
+    (35, 36, (
+      s "click*4"
+      # n 2 # lpf 300 # gain 1.1
+    ))
+    ]
+  d9 -- noise
+    $ (|* gain 1.35)
+    $ seqP [
     (32, 34, (
       fast 8
       $ (# cut 1)
-      $ every' 3 0 (const (
-        s "click ~" # n 2 # lpf 300
-      ))
       $ every' 3 1 (const (
         s "~ [tableware tableware?]" # n (irand 15) # gain 0.6 # pan rand # room 0.3
       ))
       $ s "~"
     ))
     ]
-  d5
+  d5 -- brushing
     $ (|* gain 0.95)
     $ seqP[
     (0, 36, (
@@ -394,3 +400,13 @@ do
     # sustain 5
     # hpf 700
     # sustainpedal 0.4
+  d8 -- guitar chord
+    $ (|* gain 0.9)
+    $ seqP [
+    (34, 35, (
+      stack [
+        s "G69" # pan 0.1 # gain 0.85,
+        s "DonE:1" # speed "-1" # gain 1.1
+      ]
+    ))
+    ]
