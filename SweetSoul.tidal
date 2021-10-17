@@ -405,8 +405,8 @@ do
     $ seqP [
     (34, 35, (
       stack [
-        s "G69" # pan 0.1 # gain 0.85,
-        s "DonE:1" # speed "-1" # gain 1.1
+        s "G69" # pan 0.1 # gain 0.8 # lpf 2000,
+        s "DonE" # speed "-1" # gain 1.1
       ]
     ))
     ]
