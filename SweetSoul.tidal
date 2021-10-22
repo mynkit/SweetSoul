@@ -28,6 +28,10 @@ do
       # shape 0.01
       # room 0.2
       # gain 1.0
+    )),
+    (39, 40, (
+      s "~ ~ [~ notes:2] ~"
+      # pan 0.8 # shape 0.01 # room 0.7 # gain 1.0 # up "15"
     ))
     ]
   d2
@@ -98,10 +102,63 @@ do
       # sustainpedal "0.25"
       # gain 1.0
       # room 0.25
+    )),
+    (36, 40, (
+      slow 2
+      $ jux ((0.01 ~>).(# hpf 80).(# lpf 5000).(|* gain 1.05))
+      $ s "superhammondBend*2"
+      # n "<<a4,e4,b4> <d4,cs5,fs4>> <<a4,e4,b4,g4> <d4,c5,f4>>"
+      # voice 2
+      # lpf 1000
+      # slide "<0.5 -0.5>"
+      # sustain ((*(100/bpm)) <$> "2.45")
+      # sustainpedal "0.25"
+      # gain 0.6
+      # room 0.25
+    )),
+    (40, 43, (
+      slow 2
+      $ jux ((0.01 ~>).(# hpf 80).(# lpf 5000).(|* gain 1.05))
+      $ s "superhammondBend*2"
+      # n "<<cs4,e4,b4> <b3,a4,d5>> <<fs3,e4,b4> <e4,a4,d5>>"
+      # voice 2
+      # lpf 1000
+      # slide "<0.5 -0.5>"
+      # sustain ((*(100/bpm)) <$> "2.45")
+      # sustainpedal "0.25"
+      # gain 0.6
+      # room 0.25
+    )),
+    (43, 47, (
+      slow 2
+      $ jux ((0.01 ~>).(# hpf 80).(# lpf 5000).(|* gain 1.05))
+      $ s "superhammondBend*2"
+      # n "<<a4,e4,b4> <d4,cs5,fs4>> <<a4,e4,b4,g4> <d4,c5,f4>>"
+      # voice 2
+      # lpf 1000
+      # slide "<0.5 -0.5>"
+      # sustain ((*(100/bpm)) <$> "2.45")
+      # sustainpedal "0.25"
+      # gain 0.6
+      # room 0.25
+    )),
+    (47, 51, (
+      slow 2
+      $ jux ((0.01 ~>).(# hpf 80).(# lpf 5000).(|* gain 1.05))
+      $ s "superhammondBend*2"
+      # n "<<cs4,e4,b4> <b3,a4,d5>> <<fs3,e4,b4> <e4,a4,d5>>"
+      # voice 2
+      # lpf 1000
+      # slide "<0.5 -0.5>"
+      # sustain ((*(100/bpm)) <$> "2.45")
+      # sustainpedal "0.25"
+      # gain 0.6
+      # room 0.25
     ))
     ]
   d3
     $ (|* gain 0.95)
+    $ when (==9) (# gain 0)
     $ seqP [
     (0, 28, (
       when (<=6) (# gain 0)
@@ -131,6 +188,8 @@ do
     ]
   d4 -- BassDrum-like sound
     $ (|* gain 1.35)
+    $ when (==6) (# gain 0)
+    $ when (==7) (while "t f" (# gain 0))
     $ seqP [
     (2, 28, (
       fast 4
@@ -146,16 +205,20 @@ do
         # lpf 300 # pan 0.5))
       $ s "~"
     )),
-    (32, 35, (
-      fast 8
-      $ every' 3 0 (const (
-        s "click ~" # n 2 # lpf 300
-      ))
-      $ s "~"
+    (32, 34, (
+      s "click ~ click ~ click ~"
+      # n 2 # lpf 300
     )),
-    (35, 36, (
-      s "click*4"
-      # n 2 # lpf 300 # gain 1.1
+    (34, 50, (
+      every' 3 2 (while "f t" ((ply (choose [8,4,6])).(# pan (rand*(1-rand))).(|* gain 0.8)))
+      $ sometimesBy 0.6 ((1/8) <~)
+      $ sometimesBy 0.3 ((1/16) <~)
+      $ s "~ click ~ click"
+      # n 2 # lpf 300 # pan rand
+    )),
+    (50, 51, (
+      s "click"
+      # n 2 # lpf 300
     ))
     ]
   d9 -- noise
@@ -168,6 +231,14 @@ do
         s "~ [tableware tableware?]" # n (irand 15) # gain 0.6 # pan rand # room 0.3
       ))
       $ s "~"
+    )),
+    (34, 50, (
+      someCyclesBy 0.1 (# gain 0)
+      $ fast 3
+      $ sometimesBy 0.2 (ply 4)
+      $ (# cut 1)
+      $ s "~ [tableware tableware/2?]"
+      # n (irand 15) # gain 0.6 # pan rand
     ))
     ]
   d5 -- brushing
@@ -202,16 +273,21 @@ do
       stut' 6 (3/8) ((|* gain 0.8).(|* speed 0.8).(|> pan (1))) $
       when (==0) (const $ s "brushing" # speed 2 # pan 0.8 # gain 0.75)
       $ s "~"
+    )),
+    (32, 34, (
+      s "~ ~ ~ brushing ~ brushing"
+      # speed (choose [1,2]) # pan 0.9 # gain 0.55 # room 0.3
     ))
     ]
   d6 -- bass
     $ (|* gain 0.7)
+    $ when (==10) (# gain 0)
     $ seqP [
     (4, 24, (
       (|+ n 12)
       $ when (==0) (# gain 0)
       $ when (==1) (while "t f" (# gain 0))
-      $ when (elem' [12..15]) (# gain 0)
+      $ when (elem' [6,7]) (# gain 0)
       $ every' 4 0 (const $
         s (fit 0 ["SinOscSynthBend"] "0 ~ [~ 0] [[~ 0] ~]")
         # sustain "1.2 1.2 0.7 0.7"
@@ -259,72 +335,60 @@ do
       $ s "~"
     )),
     (27, 28, (
-      stack [
-        s "SinOscSynthBend"
-        # n "<gs2,gs3>"
-        # sustain "1"
-      ]
+      s "SinOscSynthBend"
+      # n "<gs2,gs3>"
+      # sustain "1"
+    )),
+    (28, 29, (
+      s "~ ~ ~ SinOscSynthBend"
+      # n "~ ~ ~ <a2,a3>"
+      # sustain "1"
     )),
     (29, 30, (
-      stack [
-        s "SinOscSynthBend*2"
-        # n "<a2,a3> <f2,f3>"
-        # sustain "1"
-      ]
+      s "~ [~ SinOscSynthBend] ~ SinOscSynthBend"
+      # n "<a2,a3> <f2,f3> ~ <fs2,fs3>"
+      # sustain "1"
     )),
     (30, 31, (
-      stack [
-        s "SinOscSynthBend ~ ~ SinOscSynthBend"
-        # n "<fs2,fs3> <fs2,fs3> <fs2,fs3> <e2,e3>"
-        # sustain "1 1 0.5 1"
-      ]
+      s "~ ~ [~ SinOscSynthBend] ~"
+      # n "<e2,e3>"
+      # sustain "1"
     )),
     (31, 32, (
-      stack [
-        s "SinOscSynthBend ~ SinOscSynthBend ~"
-        # n "<ds2,ds3> <ds2,ds3>"
-        # sustain "1"
-      ]
+      s "~ ~ SinOscSynthBend ~"
+      # n "<ds2,ds3>"
+      # sustain "1"
     )),
     (32, 33, (
-      stack [
-        s "SinOscSynthBend*8"
-        # n "<b1,b2>"
-        # sustain "0.7"
-      ]
+      s "~ ~!2 SinOscSynthBend ~ SinOscSynthBend"
+      # n "<b1,b2>"
+      # sustain "1"
     )),
     (33, 34, (
-      stack [
-        s "SinOscSynthBend!7 ~"
-        # n "<cs2,cs3>"
-        # sustain "0.7!6 1 1"
-      ]
+      s "~!2 SinOscSynthBend ~ [SinOscSynthBend!2 ~!2] ~"
+      # n "<cs2,cs3>"
+      # sustain "1 1 [[0.5 1 1 1] 1]"
+      # gain "1 1 [[0.8 1 1 1] 1]"
     )),
     (34, 35, (
-      stack [
-        s "SinOscSynthBend ~ [~ SinOscSynthBend] SinOscSynthBend"
-        # n "<g2,g3> <g2,g3> <g2,g3> <fs2,fs3>"
-        # sustain "1 1 0.7 1"
-      ]
-    )),
-    (35, 36, (
-      stack [
-        s "SinOscSynthBend [~ [~ SinOscSynthBend]] SinOscSynthBend*2 SinOscSynthBend"
-        # n "<e2,e3> <b1,b2> <e2,e3> <e2,e2>"
-        # sustain "1 0.5 [0.4 1] 1.2"
-      ]
+      s "SinOscSynthBend ~ [~ SinOscSynthBend*2] [~ SinOscSynthBend]"
+      # n "<g2,g3> <g2,g3> <g2,g3> [<fs2,fs3> <e2,e3>]"
+      # sustain "1 1 0.5 [0.7 2]"
+      # gain  "1 1 [~ [1 0.7]] 1"
     ))
     ]
-  d7 -- B melo chord
+  d7 -- sine synth chord
     $ (|* gain 0.9)
+    $ when (<36) (# reverb 0.5)
+    $ when (>=36) (# room 0.3)
     $ seqP [
     (27, 28, (
       stack [
         (|* gain "1.0") $
         s "~!5 SinOscSynthBend ~!2"
         # n "<e2,e3,a4,d5,fs5>"
-        # slide "0.3"
-        # pan 0.9
+        # slide "0.3" # sustain 5
+        # pan 0.9 # hpf 700
       ]
     )),
     (28, 29, (
@@ -332,16 +396,16 @@ do
         (|* gain "1 0.8 0.64 0.6") $
         s "SinOscSynthBend ~!2 SinOscSynthBend ~!2 SinOscSynthBend ~"
         # n "<gs3,gs4,b4,e5>"
-        # slide "0.3 0 0 0"
-        # pan "0.5!3 0!3 1!2"
+        # slide "0.3 0 0 0" # sustain 5
+        # pan "0.5!3 0!3 1!2" # hpf 700
       ]
     )),
     (29, 30, (
       stack [
         s "~ SinOscSynthBend ~!2 SinOscSynthBend ~!2 SinOscSynthBend"
         # n "<a3,a4,b4,e5> <f3,b4,d5,gs5>"
-        # slide "0.3 0 0 0.3"
-        # pan "0.5!3 0.1!3 0.7!2"
+        # slide "0.3 0 0 0.3" # sustain 5
+        # pan "0.5!3 0.1!3 0.7!2" # hpf 700
       ]
     )),
     (30, 31, (
@@ -349,8 +413,8 @@ do
         (|* gain "1 0.8 0.64 0.6") $
         s "SinOscSynthBend ~!2 SinOscSynthBend ~!2 SinOscSynthBend ~"
         # n "<fs3,cs5,e5,a5> e3"
-        # slide "0.3 0 0 0.3"
-        # pan "0.5!3 0!3 1!2"
+        # slide "0.3 0 0 0.3" # sustain 5
+        # pan "0.5!3 0!3 1!2" # hpf 700
       ]
     )),
     (31, 32, (
@@ -358,8 +422,8 @@ do
         (|* gain "1") $
         s "~!3 SinOscSynthBend ~!4"
         # n "<ds3,ds4,a4,cs5,fs5>"
-        # slide "0.3"
-        # pan 0.4
+        # slide "0.3" # sustain 5
+        # pan 0.4 # hpf 700
       ]
     )),
     (32, 33, (
@@ -367,7 +431,8 @@ do
         stut' 3 (3/8) ((|* gain 0.8).(|* hpf 1.1).(|> pan rand).(|> slide 0)) $
         s "SinOscSynthBend"
         # n "<b3,d3,a4,d5,e5>"
-        # slide 0.3
+        # slide 0.3 # sustain 5
+        # hpf 700
       ]
     )),
     (33, 34, (
@@ -375,7 +440,8 @@ do
         stut' 3 (3/8) ((|* gain 0.8).(|* hpf 1.1).(|> pan rand).(|> slide 0)) $
         s "SinOscSynthBend"
         # n "<cs3,e3,b4,e5,fs5>"
-        # slide 0.3
+        # slide 0.3 # sustain 5
+        # hpf 700
       ]
     )),
     (34, 35, (
@@ -383,7 +449,8 @@ do
         stut' 3 (3/8) ((|* gain 0.8).(|* hpf 1.1).(|> pan rand).(|> slide 0)) $
         s "SinOscSynthBend"
         # n "<g2,g3,fs3,a4,d5>"
-        # slide 0.3
+        # slide 0.3 # sustain 5
+        # hpf 700
       ]
     )),
     (35, 36, (
@@ -391,13 +458,159 @@ do
         stut' 2 (3/8) ((|* gain 0.8).(|* hpf 1.1).(|> pan rand).(|> slide 0)) $
         s "SinOscSynthBend"
         # n "<e2,e3,a4,d5,fs5>"
-        # slide 0.3
+        # slide 0.3 # sustain 5
+        # hpf 700
+      ]
+    )),
+    (36, 37, (
+      stack [
+        stut' 3 (3/8) ((|* gain 0.8).(|* hpf 1.1).(|> pan rand).(|> slide 0)) $
+        s "SinOscSynthBend"
+        # n "<a4,b4,e5>"
+        # slide 0.3 # sustain 2 # pan 0.1
+        # hpf 900
+      ]
+    )),
+    (37, 38, (
+      stack [
+        stut' 3 (3/8) ((|* gain 0.8).(|* hpf 1.1).(|> pan rand).(|> slide 0)) $
+        (|* gain 1.2) $
+        s "~ SinOscSynthBend ~ ~"
+        # n "<g4,a4,cs5>"
+        # slide 0.3 # sustain 2
+        # pan 0.3 # hpf 900
+      ]
+    )),
+    (38, 39, (
+      stack [
+        stut' 3 (3/8) ((|* gain 0.8).(|* hpf 1.1).(|> pan rand).(|> slide 0)) $
+        (|* gain 1.2) $
+        s "SinOscSynthBend"
+        # n "<fs4,a4,d5>"
+        # slide 0.3 # sustain 2
+        # pan 0.9 # hpf 900
+      ]
+    )),
+    (39, 40, (
+      stack [
+        stut' 3 (3/8) ((|* gain 0.8).(|* hpf 1.1).(|> pan rand).(|> slide 0)) $
+        (|* gain "[0 1.2] 1.2 1.2 1.2") $
+        s "[~ SinOscSynthBend] [~ SinOscSynthBend] ~ ~"
+        # n "<f4,a4,e5> d5 ~ ~"
+        # slide 0.3 # sustain 2
+        # pan 0.8 # hpf 900
+      ]
+    )),
+    (40, 41, (
+      stack [
+        stut' 3 (3/8) ((|* gain 0.8).(|* hpf 1.1).(|> pan rand).(|> slide 0)) $
+        (|* gain "1.1") $
+        s "SinOscSynthBend"
+        # n "<af4,a4,b4>"
+        # slide 0.3 # sustain 2
+        # pan 0.1 # hpf 900
+      ]
+    )),
+    (41, 42, (
+      stack [
+        stut' 3 (3/8) ((|* gain 0.8).(|* hpf 1.1).(|> pan rand).(|> slide 0)) $
+        (|* gain "0.9") $
+        s "~ SinOscSynthBend ~ ~"
+        # n "<af4,e5,af5>"
+        # slide 0.3 # sustain 2
+        # pan 0.4 # hpf 900
+      ]
+    )),
+    (42, 43, (
+      stack [
+        stut' 3 (3/8) ((|* gain 0.8).(|* hpf 1.1).(|> pan rand).(|> slide 0)) $
+        (|* gain "1.1") $
+        s "[~ SinOscSynthBend] ~ ~ ~"
+        # n "<b3,a4,d5,e5>"
+        # slide 0.3 # sustain 2
+        # pan 0.1 # hpf 900
+      ]
+    )),
+    (43, 44, (
+      stack [
+        stut' 3 (3/8) ((|* gain 0.8).(|* hpf 1.1).(|> pan rand).(|> slide 0)) $
+        s "[~ SinOscSynthBend] ~ ~ ~"
+        # n "<a4,b4,e5>"
+        # slide 0.3 # sustain 2
+        # pan 0.9 # hpf 900
+      ]
+    )),
+    (44, 45, (
+      stack [
+        stut' 3 (3/8) ((|* gain 0.8).(|* hpf 1.1).(|> pan rand).(|> slide 0)) $
+        (|* gain 1.2) $
+        s "~ SinOscSynthBend ~ ~"
+        # n "<g4,a4,cs5>"
+        # slide 0.3 # sustain 2
+        # pan 0.2 # hpf 900
+      ]
+    )),
+    (45, 46, (
+      stack [
+        stut' 3 (3/8) ((|* gain 0.8).(|* hpf 1.1).(|> pan rand).(|> slide 0)) $
+        (|* gain 1.2) $
+        s "SinOscSynthBend"
+        # n "<fs4,a4,d5>"
+        # slide 0.3 # sustain 2
+        # pan 0.7 # hpf 900
+      ]
+    )),
+    (46, 47, (
+      stack [
+        stut' 3 (3/8) ((|* gain 0.8).(|* hpf 1.1).(|> pan rand).(|> slide 0)) $
+        (|* gain "[0 1.2] 1.2 1.2 1.2") $
+        s "SinOscSynthBend [~ SinOscSynthBend] ~ ~"
+        # n "<f4,a4,e5> <f4,d5> ~ ~"
+        # slide 0.3 # sustain 2
+        # pan 0.2 # hpf 900
+      ]
+    )),
+    (47, 48, (
+      stack [
+        stut' 3 (3/8) ((|* gain 0.8).(|* hpf 1.1).(|> pan rand).(|> slide 0)) $
+        (|* gain "1.0") $
+        s "~ [~ SinOscSynthBend] ~ ~"
+        # n "<af4,a4,e5>"
+        # slide 0.3 # sustain 2
+        # pan 0.1 # hpf 900
+      ]
+    )),
+    (48, 49, (
+      stack [
+        stut' 3 (3/8) ((|* gain 0.8).(|* hpf 1.1).(|> pan rand).(|> slide 0)) $
+        (|* gain "0.9") $
+        s "~ SinOscSynthBend ~ ~"
+        # n "<af4,e5,af5>"
+        # slide 0.3 # sustain 2
+        # pan 0.5 # hpf 900
+      ]
+    )),
+    (49, 50, (
+      stack [
+        stut' 3 (3/8) ((|* gain 0.8).(|* hpf 1.1).(|> pan rand).(|> slide 0)) $
+        (|* gain "1.1") $
+        s "[~ SinOscSynthBend] ~ ~ ~"
+        # n "<b3,a4,d5,e5>"
+        # slide 0.3 # sustain 2
+        # pan 0.4 # hpf 900
+      ]
+    )),
+    (50, 51, (
+      stack [
+        stut' 3 (3/8) ((|* gain 0.8).(|* hpf 1.1).(|> pan rand).(|> slide 0)) $
+        (|* gain "1.1") $
+        s "SinOscSynthBend"
+        # n "<e3,d5,a4>"
+        # slide 0.3 # sustain 2
+        # pan 0.8 # hpf 900
       ]
     ))
     ]
-    # reverb 0.5
-    # sustain 5
-    # hpf 700
     # sustainpedal 0.4
   d8 -- guitar chord
     $ (|* gain 0.9)
@@ -407,5 +620,18 @@ do
         s "G69" # pan 0.1 # gain 0.8 # lpf 2000,
         s "DonE" # speed "-1" # gain 1.1
       ]
+    ))
+    ]
+  d15
+    $ seqP [
+    (0, 51, (
+      someCyclesBy 0.7 (# gain 0)
+      $ fast (range 0.25 8 rand)
+      $ sometimesBy 0.4 (0.25 ~>)
+      $ s "SinOscSynthBend"
+      # n (choose [2,3,4,5])
+      # sustain (range 0.0004 0.0006 rand)
+      # pan (slow 5 rand)
+      # gain (range 0.5 0.9 rand)
     ))
     ]
