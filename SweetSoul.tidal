@@ -36,11 +36,12 @@ do
     ]
   d2
     $ (|* gain 0.4)
+    -- $ (jux ((0.01 ~>).(# hpf 80).(# lpf 5000).(|* gain 1.05)))
+    $ (jux ((# hpf 80).(# lpf 5000).(|* gain 1.05)))
     $ seqP [
     (2, 15, (
       when (==11) (# sustain ((*(100/bpm)) <$> "5.45"))
       $ slow 2
-      $ jux ((0.01 ~>).(# hpf 80).(# lpf 5000).(|* gain 1.05))
       $ s "~ ~ ~ [~ superhammondBend]"
       # n "<a4,e4,cs5>"
       # voice 2
@@ -48,12 +49,11 @@ do
       # slide "0 0 0 <0.5 -0.5>"
       # sustain ((*(100/bpm)) <$> "4.9")
       # sustainpedal "1.9"
-      # gain 0.8
+      # gain 0.75
       # room 0.25
     )),
     (16, 20, (
       slow 2
-      $ jux ((0.01 ~>).(# hpf 80).(# lpf 5000).(|* gain 1.05))
       $ s "superhammondBend*2"
       # n "<<d4,fs4,cs5> <b4,d5,a4>> <<cs4,e4,b4> <e4,a4,d5>>"
       # voice 2
@@ -61,12 +61,11 @@ do
       # slide "<0.5 -0.5>"
       # sustain ((*(100/bpm)) <$> "2.45")
       # sustainpedal "0.25"
-      # gain 1.0
+      # gain 0.9
       # room 0.25
     )),
     (18, 21, (
       slow 2
-      $ jux ((0.01 ~>).(# hpf 80).(# lpf 5000).(|* gain 1.05))
       $ s "~ ~ ~ [~ superhammondBend]"
       # n "<a4,e4,cs5>"
       # voice 2
@@ -74,12 +73,11 @@ do
       # slide "0 0 0 <0.5 0.1>"
       # sustain ((*(100/bpm)) <$> "5.45")
       # sustainpedal "1.9"
-      # gain 0.8
+      # gain 0.75
       # room 0.25
     )),
     (22, 23, (
       slow 2
-      $ jux ((0.01 ~>).(# hpf 80).(# lpf 5000).(|* gain 1.05))
       $ s "superhammondBend"
       # n "<a4,e4,cs5>"
       # voice 2
@@ -87,12 +85,11 @@ do
       # slide "0 0 0 0.5"
       # sustain ((*(100/bpm)) <$> "4.9")
       # sustainpedal "0.5"
-      # gain 0.8
+      # gain 0.75
       # room 0.25
     )),
     (24, 28, (
       slow 2
-      $ jux ((0.01 ~>).(# hpf 80).(# lpf 5000).(|* gain 1.05))
       $ s "superhammondBend*2"
       # n "<<d4,fs4,cs5> <b4,d5,a4>> <<cs4,e4,b4> <e4,a4,d5>>"
       # voice 2
@@ -100,12 +97,11 @@ do
       # slide "<0.5 -0.5>"
       # sustain ((*(100/bpm)) <$> "2.45")
       # sustainpedal "0.25"
-      # gain 1.0
+      # gain 0.9
       # room 0.25
     )),
     (36, 40, (
       slow 2
-      $ jux ((0.01 ~>).(# hpf 80).(# lpf 5000).(|* gain 1.05))
       $ s "superhammondBend*2"
       # n "<<a4,e4,b4> <d4,cs5,fs4>> <<a4,e4,b4,g4> <d4,c5,f4>>"
       # voice 2
@@ -118,7 +114,6 @@ do
     )),
     (40, 43, (
       slow 2
-      $ jux ((0.01 ~>).(# hpf 80).(# lpf 5000).(|* gain 1.05))
       $ s "superhammondBend*2"
       # n "<<cs4,e4,b4> <b3,a4,d5>> <<fs3,e4,b4> <e4,a4,d5>>"
       # voice 2
@@ -131,7 +126,6 @@ do
     )),
     (43, 47, (
       slow 2
-      $ jux ((0.01 ~>).(# hpf 80).(# lpf 5000).(|* gain 1.05))
       $ s "superhammondBend*2"
       # n "<<a4,e4,b4> <d4,cs5,fs4>> <<a4,e4,b4,g4> <d4,c5,f4>>"
       # voice 2
@@ -144,7 +138,6 @@ do
     )),
     (47, 51, (
       slow 2
-      $ jux ((0.01 ~>).(# hpf 80).(# lpf 5000).(|* gain 1.05))
       $ s "superhammondBend*2"
       # n "<<cs4,e4,b4> <b3,a4,d5>> <<fs3,e4,b4> <e4,a4,d5>>"
       # voice 2
@@ -416,7 +409,7 @@ do
     ))
     ]
   d7 -- sine synth chord
-    $ (|* gain 0.9)
+    $ (|* gain 0.81)
     $ when (<36) ((# room 0.1).(# sustain 2.5).(# reverb 0.1))
     $ when (>=36) ((# room 0.3).(# sustain 2))
     $ seqP [

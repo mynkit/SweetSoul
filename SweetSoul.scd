@@ -60,7 +60,7 @@ SynthDef("SinOscSynthBend", {
 		env = EnvGen.ar(Env.linen(0.1, sustain, 0.1, sustain), doneAction:2);
 		fglide = EnvGen.ar(Env.perc(0.05, 0.3, 1, \lin), timeScale:bendSustain) * (-1*slide/4) + 1;
 		freq = freq * fglide * Line.kr(1, 1+accelerate, bendSustain);
-		freqs = [0.5, 1.4988, 1, 2, 2.9976, 4, 5.0409, 5.9953, 8] * freq;
+		freqs = [0.5, 1.4988, 1, 2, 2.9976, 4, 5.0409, 5.9953, 8, 1.001] * freq;
 		freqs = 2**(freqs < 63) * freqs; // fold up bottom register
 		freqs = freqs / (2**(freqs > 6000)); // fold down high harmonics
 		freqs = freqs / (2**(freqs > 6000)); // do it again for the really high notes
@@ -84,7 +84,8 @@ SynthDef("SinOscSynthBend", {
 		//sound = 0.5 * Mix.ar( SinOsc.ar(freqs*(2*click+1), (2pi ! 9).rand, amps/amps.sum) );
 		sound = perc * 0.5 * SinOsc.ar(freq*percf, 2pi.rand) * XLine.ar(1,1e-6,2*decay+1) + sound;
 		sound = sound + BAllPass.ar(sound, 1000*LFTri.kr(vrate,0,vibrato/2,1));
-		// Out.ar(out, DirtPan.ar(sound, ~dirt.numChannels, pan, env));
+		// panning
+		sound = Pan2.ar(sound, FSinOsc.kr(1.43));
 		Out.ar(out, DirtPan.ar(sound, ~dirt.numChannels, pan, env));
 	}).add;
 
