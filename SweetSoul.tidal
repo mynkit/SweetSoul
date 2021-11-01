@@ -199,7 +199,7 @@ do
       $ s "~"
     )),
     (28, 30, (
-      s "~ click ~ ~"
+      s "~ click [~ click] ~"
       # n 2 # lpf 250
     )),
     (30, 31, (
@@ -207,7 +207,7 @@ do
       # n 2 # lpf 270
     )),
     (31, 32, (
-      s "~ ~ [~ click] ~"
+      s "~ click ~ [~ click]"
       # n 2 # lpf 290
     )),
     (32, 33, (
@@ -661,21 +661,38 @@ do
     (-4, -3, (
       s "station:0" # gain 0.8 # speed "1"
     )),
-    -- (3, 4, (
-    --   s "~ station:1" # gain 0.9 # speed "-1" # lpf 500
-    -- )),
-    -- (5, 6, (
-    --   s "station:1" # gain 1 # speed "-0.3" # lpf 1500
-    -- )),
-    -- (8, 9, (
-    --   s "station:2" # gain 0.5 # speed "-1"
-    -- )),
-    -- (9, 10, (
-    --   s "station:2" # gain 0.6 # speed "-0.5" # pan 0.3
-    -- )),
-    -- (11, 12, (
-    --   s "station:2" # gain 0.6 # speed "-0.25" # pan 0.7
-    -- )),
+    (30, 31, (
+      s "~ bath:4 ~ ~" # gain 0.65 # pan 0.1 # room 0.5 # shape 0.3 # speed "1.75"
+    )),
+    (31, 32, (
+      s "~ ~ ~ [~ station:1]" # gain 0.55 # speed "-1" # lpf 500
+    )),
+    (32, 33, (
+      s "[~ station:2] ~ ~ ~" # gain 0.4 # speed "-0.5" # lpf 1500
+    )),
+    (33, 34, (
+      stack [
+       s "station:1" # gain 0.35 # pan 0 # speed "1",
+       s "~ station:2" # gain 0.35 # pan 0.7 # speed "-1",
+       s "~ ~ ~ station:2" # gain 0.35 # pan 0.9 # speed "1.5"
+      ]
+    )),
+    (34, 35, (
+      stack [
+       s "station:1" # gain 0.4 # pan 0 # speed "0.5",
+       s "~ station:2" # gain 0.4 # pan 0.7 # speed "-1",
+       s "~ ~ [~ station:1] ~" # gain 0.4 # pan 0.2 # speed "-2"
+      ]
+    )),
+    (35, 36, (
+      stack [
+       s "station:1" # gain 0.4 # pan 0 # speed "2",
+       s "~ station:2" # gain 0.4 # pan 0.1 # speed "-2.5",
+       s "~ ~ [~ station:1] ~" # gain 0.4 # pan 1 # speed "-1.5",
+       s "~ ~ ~ station:2" # gain 0.3 # pan 0.9 # speed "-1",
+       s "~ ~ bath:5 ~" # gain 0.55 # pan 0.5 # speed "0.4" # shape 0.2 # room 0.3
+      ]
+    )),
     (4, 51, (
       sometimesBy 0.2 (# gain 0)
       $ fast (range 0.25 40 rand)
