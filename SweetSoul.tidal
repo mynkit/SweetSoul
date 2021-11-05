@@ -3,7 +3,7 @@ setcps (86/60/4)
 all $ (|* gain 1.2)
 
 do
-  resetCyclesTo (-4-0.05)
+  resetCyclesTo (0-0.05)
   let
     bpm = 86
   d1
@@ -230,7 +230,7 @@ do
     ))
     ]
   d4 -- BassDrum-like sound
-    $ (|* gain 1.05)
+    $ (|* gain 1.0)
     $ when (==6) (# gain 0)
     $ when (==7) (while "t f" (# gain 0))
     $ seqP [
@@ -281,7 +281,7 @@ do
     ))
     ]
   d9 -- noise
-    $ (|* gain 1.33)
+    $ (|* gain 1.31)
     $ seqP [
     (32, 34, (
       fast 8
@@ -301,7 +301,7 @@ do
     ))
     ]
   d5 -- brushing
-    $ (|* gain 0.8)
+    $ (|* gain 0.78)
     $ seqP[
     (0, 36, (
       every' 8 7 (const $
