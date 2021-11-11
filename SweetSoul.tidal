@@ -23,13 +23,13 @@ do
       $ when (>=1) (stut' 8 (3/8) ((|* gain 0.6).(|> pan (0.8))))
       $ when (>=1) (every' 2 1 (# up "-2"))
       $ when (>=1) (every' 4 2 (# up "0 0 0 -4"))
-      $ when (==28) (const $ s "notes:2" # up "-5" # room 0.2 # shape 0.01 # gain 0.75)
+      $ when (==28) (const $ s "notes:2" # up "-5" # room 0.2 # shape 0 # gain 0.7)
       $ when (>=29) (const $ s "~")
       $ s "<notes:2 ~> ~ [~ <~ notes:2>] [~ <notes:2 ~>]"
       # pan 0.5
-      # shape 0.01
+      # shape 0
       # room 0.2
-      # gain 0.75
+      # gain 0.7
     )),
     (38, 39, (
       s "[~ waterdrop:0] ~ ~ ~"
@@ -37,7 +37,7 @@ do
     )),
     (39, 40, (
       s "~ ~ [~ notes:2] ~"
-      # pan 0.8 # shape 0.01 # room 0.7 # gain 0.7 # up "15"
+      # pan 0.8 # room 0.7 # gain 0.7 # up "15"
     )),
     (41, 43, (
       (# cut 1)
@@ -125,7 +125,7 @@ do
       # slide "0 0 0 <0.5 -0.5>"
       # sustain ((*(100/bpm)) <$> "4.9")
       # sustainpedal "1.9"
-      # gain 0.6
+      # gain 0.55
       # room 0.25
     )),
     (16, 20, (
@@ -137,7 +137,7 @@ do
       # slide "<0.5 -0.5>"
       # sustain ((*(100/bpm)) <$> "2.45")
       # sustainpedal "0.25"
-      # gain 0.74
+      # gain 0.67
       # room 0.25
     )),
     (18, 21, (
@@ -149,7 +149,7 @@ do
       # slide "0 0 0 <0.5 0.1>"
       # sustain ((*(100/bpm)) <$> "5.45")
       # sustainpedal "1.9"
-      # gain 0.6
+      # gain 0.55
       # room 0.25
     )),
     (22, 23, (
@@ -161,7 +161,7 @@ do
       # slide "0 0 0 0.5"
       # sustain ((*(100/bpm)) <$> "4.9")
       # sustainpedal "0.5"
-      # gain 0.6
+      # gain 0.55
       # room 0.25
     )),
     (24, 28, (
@@ -173,7 +173,7 @@ do
       # slide "<0.5 -0.5>"
       # sustain ((*(100/bpm)) <$> "2.45")
       # sustainpedal "0.25"
-      # gain 0.74
+      # gain 0.67
       # room 0.25
     )),
     (32, 36, (
@@ -185,7 +185,7 @@ do
       # slide "<0.5 -0.5>"
       # sustain ((*(100/bpm)) <$> "2.45")
       # sustainpedal "0.25"
-      # gain 0.5
+      # gain 0.47
       # room 0.25
     )),
     (36, 40, (
@@ -255,6 +255,7 @@ do
     $ seqP [
     (0, 28, (
       when (<=6) (# gain 0)
+      $ (|* gain 0.95)
       $ fast 8
       $ (|- n 7)
       $ every' 3 0 (const (
@@ -267,6 +268,7 @@ do
     )),
     (35, 36, (
       fast 8
+      $ (|* gain 0.95)
       $ (|- n 7)
       $ every' 3 0 (const (
         s "SinOscSynthBend ~" # n "<af4,af5,af6>"
@@ -287,19 +289,20 @@ do
     $ (|* gain 1.0)
     $ when (==6) (while "f f t t" (# gain 0))
     $ when (==7) (while "t f f f" (# gain 0))
+    $ (# lpf 250)
     $ seqP [
     (2, 28, (
       fast 4
       $ when (>=4) (every' 6 0 (const (
         s "~ [click click]" # n 2
         # gain "1 [1 0.8]" # speed "1 [1 0.4]"
-        # lpf 300 # pan 0.5)))
+        # lpf 250 # pan 0.5)))
       $ every' 3 0 (const (
         s "~ click" # n 2
-        # lpf 300 # pan 0.5))
+        # lpf 250 # pan 0.5))
       $ every' 3 2 (const (
         s "click ~" # n 2
-        # lpf 300 # pan 0.5))
+        # lpf 250 # pan 0.5))
       $ s "~"
     )),
     (28, 30, (
@@ -427,7 +430,7 @@ do
     ))
     ]
   d6 -- bass
-    $ (|* gain 0.49)
+    $ (|* gain 0.45)
     $ when (==4) (# gain 0)
     $ when (==5) (while "t f" (# gain 0))
     $ when (==10) (while "f t t f" (# gain 0))
