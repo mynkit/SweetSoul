@@ -32,7 +32,7 @@ do
       # pan 0.5
       # shape 0
       # room 0.2
-      # gain 0.7
+      # gain 0.68
     )),
     (38, 39, (
       s "[~ waterdrop:0] ~ ~ ~"
@@ -128,7 +128,7 @@ do
       # slide "0 0 0 <0.5 -0.5>"
       # sustain ((*(100/bpm)) <$> "4.9")
       # sustainpedal "1.9"
-      # gain 0.45
+      # gain 0.46
       # room 0.25
     )),
     (16, 20, (
@@ -140,7 +140,7 @@ do
       # slide "<0.5 -0.5>"
       # sustain ((*(100/bpm)) <$> "2.45")
       # sustainpedal "0.25"
-      # gain 0.5
+      # gain 0.51
       # room 0.25
     )),
     (18, 21, (
@@ -152,7 +152,7 @@ do
       # slide "0 0 0 <0.5 0.1>"
       # sustain ((*(100/bpm)) <$> "5.45")
       # sustainpedal "1.9"
-      # gain 0.45
+      # gain 0.46
       # room 0.25
     )),
     (22, 23, (
@@ -164,7 +164,7 @@ do
       # slide "0 0 0 0.5"
       # sustain ((*(100/bpm)) <$> "4.9")
       # sustainpedal "0.5"
-      # gain 0.45
+      # gain 0.46
       # room 0.25
     )),
     (24, 28, (
@@ -176,7 +176,7 @@ do
       # slide "<0.5 -0.5>"
       # sustain ((*(100/bpm)) <$> "2.45")
       # sustainpedal "0.25"
-      # gain 0.5
+      # gain 0.51
       # room 0.25
     )),
     (32, 36, (
@@ -371,8 +371,8 @@ do
     ]
   d5 -- brushing
     $ (|* gain 0.55)
-    $ when (==9) (while "f t" ((ply "1 2 2 4").(|* gain 0.8)))
-    $ when (==10) (while "t f" ((ply "8").(|* gain 0.8)))
+    $ when (==9) (while "f t" ((ply "1 2 2 4").(|* gain 0.9)))
+    $ when (==10) (while "t f" ((ply "8").(|* gain 0.85)))
     $ seqP[
     (0, 36, (
       every' 8 7 (const $
@@ -390,11 +390,11 @@ do
     (8, 28, (
       every' 4 2 (const $
         stack [
-          s "~ [~!3 brushing] ~ [~!3 brushing]" # speed "1" # pan 0.2 # gain 0.75,
+          s "~ [~!3 brushing] ~ [~!3 brushing]" # speed "1" # pan 0.2 # gain 0.85,
           s "brushing" # speed 2 # pan 0.8 # gain 0.75
         ]
       )
-      $ s "~ [~!3 brushing] ~ [~!3 brushing]" # speed "1" # pan 0.2 # gain 0.75
+      $ s "~ [~!3 brushing] ~ [~!3 brushing]" # speed "1" # pan 0.2 # gain 0.85
     )),
     (8, 28, (
       stut' 2 (3/16) ((|* gain 0.8).(|* speed 0.9).(|> pan (0))) $
@@ -407,7 +407,7 @@ do
     (28, 30, (
       stut' 2 (3/16) ((|* gain 0.8).(|* speed 0.9).(|> pan (0))) $
       stut' 6 (3/8) ((|* gain 0.8).(|* speed 0.8).(|> pan (1))) $
-      when (==0) (const $ s "brushing" # speed 2 # pan 0.8 # gain 0.75)
+      when (==0) (const $ s "brushing" # speed 2 # pan 0.8 # gain 0.85)
       $ s "~"
     )),
     (32, 40, (
@@ -433,11 +433,12 @@ do
     ))
     ]
   d6 -- bass
-    $ (|* gain 0.37)
+    $ (|* gain 0.35)
     $ when (==4) (# gain 0)
     $ when (==5) (while "t f" (# gain 0))
     $ when (==10) (while "f t t f" (# gain 0))
     $ when (==11) (while "f f f t" (# gain 0))
+    $ (jux(0.007~>))
     $ seqP [
     (4, 24, (
       (|+ n 12)
