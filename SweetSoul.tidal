@@ -433,7 +433,7 @@ do
     ))
     ]
   d6 -- bass
-    $ (|* gain 0.35)
+    $ (|* gain 0.33)
     $ when (==4) (# gain 0)
     $ when (==5) (while "t f" (# gain 0))
     $ when (==10) (while "f t t f" (# gain 0))
@@ -879,7 +879,7 @@ do
        s "~ ~ bath:5 ~" # gain 0.5 # pan 0.5 # speed "0.4" # shape 0.2 # room 0.3
       ]
     )),
-    (4, 28, (
+    (4, 6, (
       sometimesBy 0.2 (# gain 0)
       $ fast (range 0.25 20 rand)
       $ sometimesBy 0.4 (0.25 ~>)
@@ -890,14 +890,14 @@ do
       # gain (range 0.3 0.5 rand)
     )),
     (28, 32, (
-      sometimesBy 0.3 (jux(rev))
-      $ sometimesBy 0.5 (0.125 ~>)
-      $ sometimesBy 0.2 (# room 0.5)
-      $ s "SinOscSynthBend*32"
+      sometimesBy 0.2 (# gain 0)
+      $ fast (range 0.25 20 rand)
+      $ sometimesBy 0.4 (0.25 ~>)
+      $ s "SinOscSynthBend"
       # n (choose [2,3,4,5])
-      # sustain (range 0.0004 0.0008 (fast 3 $ rand))
-      # pan (fast 4 rand)
-      # gain (range 0.3 0.5 (fast 5 $ rand))
+      # sustain (range 0.0003 0.0005 rand)
+      # pan (slow 5 rand)
+      # gain (range 0.3 0.5 rand)
     )),
     (32, 51, (
       sometimesBy 0.2 (# gain 0)
@@ -910,13 +910,13 @@ do
       # gain (range 0.3 0.5 rand)
     )),
     (51, 59, (
-      sometimesBy 0.3 (jux(rev))
-      $ sometimesBy 0.5 (0.125 ~>)
-      $ sometimesBy 0.2 (# room 0.5)
-      $ s "SinOscSynthBend*32"
+      sometimesBy 0.2 (# gain 0)
+      $ fast (range 0.25 20 rand)
+      $ sometimesBy 0.4 (0.25 ~>)
+      $ s "SinOscSynthBend"
       # n (choose [2,3,4,5])
-      # sustain (range 0.0004 0.001 (fast 3 $ rand))
-      # pan (fast 4 rand)
-      # gain (range 0.3 0.5 (fast 5 $ rand))
+      # sustain (range 0.0003 0.0005 rand)
+      # pan (slow 5 rand)
+      # gain (range 0.3 0.5 rand)
     ))
     ]
