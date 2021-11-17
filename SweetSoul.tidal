@@ -433,7 +433,7 @@ do
     ))
     ]
   d6 -- bass
-    $ (|* gain 0.33)
+    $ (|* gain 0.32)
     $ when (==4) (# gain 0)
     $ when (==5) (while "t f" (# gain 0))
     $ when (==10) (while "f t t f" (# gain 0))
@@ -879,7 +879,7 @@ do
        s "~ ~ bath:5 ~" # gain 0.5 # pan 0.5 # speed "0.4" # shape 0.2 # room 0.3
       ]
     )),
-    (4, 6, (
+    (4, 5, (
       sometimesBy 0.2 (# gain 0)
       $ fast (range 0.25 20 rand)
       $ sometimesBy 0.4 (0.25 ~>)
