@@ -9,8 +9,8 @@ SynthDef("sine", {
 		sig*LFPar.ar(parFreq),
 		if(
 			LFPar.ar(parFreq)>0,
-			sig*(1-(LFPar.ar(parFreq)*parFreq*10)),
-			sig*(-1-(LFPar.ar(parFreq)*parFreq*10))
+			sig*(LFPar.ar(parFreq) + (1-(LFPar.ar(parFreq))*((1-(parFreq*10))))),
+			sig*(LFPar.ar(parFreq) + (-1-(LFPar.ar(parFreq))*((1-(parFreq*10))))),
 		)
 	);
 	// panning
@@ -23,11 +23,12 @@ SynthDef("sine", {
 }, [0.1, 0.3, 0.3, 0.3]).add;
 )
 
-x = Synth("sine", [\freq, 440, \amp, 0.1, \parFreq, 0, \pan2Freq, 0]);
+x = Synth("sine", [\freq, 440, \amp, 0.1, \parFreq, 0.5, \pan2Freq, 0]);
+x = Synth("sine", [\freq, 440, \amp, 0.1, \parFreq, 0, \pan2Freq, 0.5]);
 x.set(\amp, 0);
 x.set(\amp, 0.1);
 x.set(\parFreq, 0);
-x.set(\pan2Freq, 0.5);
+x.set(\pan2Freq, 0);
 x.set(\freq, 660, \amp, 0.08);
 x.set(\freq, 440, \amp, 0.1);
 x.set(\freq, 344, \amp, 0.11);
