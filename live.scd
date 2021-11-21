@@ -31,15 +31,32 @@ SynthDef("sine", {
 }, [0.3, 2, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 1]).add;
 )
 
-x = Synth("sine", [\freq, 659.255, \amp, 0.1, \parFreq, 0, \pan2Freq, 1, \vibratoDepth, 0.3, \vibratoFreq, 3, \actave, 1, \reverb, 0.2]);
+// livecoding
+
+x = Synth("sine", [\freq, 659.255, \amp, 0, \parFreq, 0, \pan2Freq, 1, \vibratoDepth, 0.3, \vibratoFreq, 3, \actave, 1, \reverb, 0.2]);
+x.set(\amp, 0.1);
+x.set(\reverb, 0.4);
+x.set(\ice, 0.2);
+x.set(\parFreq, 0);
+x.set(\pan2Freq, 0);
+x.set(\pan2Freq, 164.814/16);
+y = Synth("sine", [\freq, 880, \amp, 0, \parFreq, 0, \pan2Freq, 1, \vibratoDepth, 0.3, \vibratoFreq, 3, \actave, 1, \reverb, 0.2]);
+y.set(\amp, 0.08);
+y.set(\pan2Freq, 1);
+
+x.set(\amp, 0);
+y.set(\amp, 0);
+
+// 実験
+x = Synth("sine", [\freq, 659.255, \amp, 0, \parFreq, 0, \pan2Freq, 1, \vibratoDepth, 0.3, \vibratoFreq, 3, \actave, 1, \reverb, 0.2]);
 x.set(\amp, 0);
 x.set(\amp, 0.1);
-x.set(\reverb, 0.9);
-x.set(\ice, 1);
+x.set(\reverb, 0.5);
+x.set(\ice, 0);
 x.set(\vibratoDepth, 0.3);
 x.set(\vibratoFreq, 3);
 x.set(\parFreq, 10);
-x.set(\pan2Freq, 220);
+x.set(\pan2Freq, 164.814);
 x.set(\freq, 164.814); // E3
 x.set(\freq, 659.255/2); // E4
 x.set(\freq, 659.255); // E5
@@ -54,3 +71,4 @@ x.set(\freq, 987.767); // B5
 x.set(\freq, 1318.510); // E6
 x.set(\freq, 1661.219); // G#6
 x.set(\freq, 1760); // A6
+
